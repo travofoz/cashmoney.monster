@@ -7,6 +7,11 @@ import { toast } from 'react-hot-toast';
 
 import FormProgress from '@/components/FormProgress';
 import FormStep from '@/components/form/FormStep';
+import LoanDetailsStep from '@/components/form/LoanDetailsStep';
+import PersonalInfoStep from '@/components/form/PersonalInfoStep';
+import FinancialInfoStep from '@/components/form/FinancialInfoStep';
+import AdditionalDetailsStep from '@/components/form/AdditionalDetailsStep';
+import TCPAConsentStep from '@/components/form/TCPAConsentStep';
 import { 
   loadFormData, 
   saveFormData, 
@@ -159,11 +164,10 @@ export default function LoanApplicationForm() {
             stepNumber={2}
             totalSteps={6}
           >
-            <div className="space-y-4">
-              <p className="text-sm text-muted-foreground">
-                Step 2 content will be implemented in Phase 3
-              </p>
-            </div>
+            <LoanDetailsStep 
+              formData={formData}
+              onChange={handleFieldChange}
+            />
           </FormStep>
         );
 
@@ -175,11 +179,10 @@ export default function LoanApplicationForm() {
             stepNumber={3}
             totalSteps={6}
           >
-            <div className="space-y-4">
-              <p className="text-sm text-muted-foreground">
-                Step 3 content will be implemented in Phase 3
-              </p>
-            </div>
+            <PersonalInfoStep 
+              formData={formData}
+              onChange={handleFieldChange}
+            />
           </FormStep>
         );
 
@@ -191,11 +194,10 @@ export default function LoanApplicationForm() {
             stepNumber={4}
             totalSteps={6}
           >
-            <div className="space-y-4">
-              <p className="text-sm text-muted-foreground">
-                Step 4 content will be implemented in Phase 3
-              </p>
-            </div>
+            <FinancialInfoStep 
+              formData={formData}
+              onChange={handleFieldChange}
+            />
           </FormStep>
         );
 
@@ -207,11 +209,10 @@ export default function LoanApplicationForm() {
             stepNumber={5}
             totalSteps={6}
           >
-            <div className="space-y-4">
-              <p className="text-sm text-muted-foreground">
-                Step 5 content will be implemented in Phase 3
-              </p>
-            </div>
+            <AdditionalDetailsStep 
+              formData={formData}
+              onChange={handleFieldChange}
+            />
           </FormStep>
         );
 
@@ -223,11 +224,10 @@ export default function LoanApplicationForm() {
             stepNumber={6}
             totalSteps={6}
           >
-            <div className="space-y-4">
-              <p className="text-sm text-muted-foreground">
-                Step 6 content will be implemented in Phase 3
-              </p>
-            </div>
+            <TCPAConsentStep 
+              formData={formData}
+              onChange={handleFieldChange}
+            />
           </FormStep>
         );
 
