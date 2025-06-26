@@ -1,6 +1,6 @@
 "use client";
 
-import React from 'react';
+import React, { useState } from 'react';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
@@ -31,13 +31,24 @@ export default function FormInput({
   options = null,
   error = null
 }) {
-  // Auto-validate field if no custom error provided
-  const validationError = error || getFieldError(name, value);
-  const showError = required && validationError;
+  const [touched, setTouched] = useState(false);
+  const [localError, setLocalError] = useState(null);
+  
+  // Only show validation error if field has been touched and has error
+  const validationError = error || localError;
+  const showError = touched && validationError;
 
   const handleChange = (newValue) => {
     if (onChange) {
       onChange(name, newValue);
+    }
+  };
+
+  const handleBlur = () => {
+    setTouched(true);
+    if (required || value) {
+      const errorMsg = getFieldError(name, value);
+      setLocalError(errorMsg);
     }
   };
 
@@ -49,7 +60,10 @@ export default function FormInput({
           {label} {required && <span className="text-destructive">*</span>}
         </Label>
         <Select value={value} onValueChange={handleChange}>
-          <SelectTrigger className={showError ? "border-destructive" : ""}>
+          <SelectTrigger 
+            className={showError ? "border-destructive" : ""}
+            onBlur={handleBlur}
+          >
             <SelectValue placeholder={placeholder || `Select ${label.toLowerCase()}`} />
           </SelectTrigger>
           <SelectContent>
@@ -107,6 +121,7 @@ export default function FormInput({
         type={type}
         value={formatValue(value)}
         onChange={handleInputChange}
+        onBlur={handleBlur}
         placeholder={placeholder}
         className={showError ? "border-destructive" : ""}
         autoComplete={getAutoComplete(name)}

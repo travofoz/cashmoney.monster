@@ -1,20 +1,26 @@
-import LoanApplicationForm from "@/components/LoanApplicationForm"
-import { ModeToggle } from "@/components/mode-toggle"
+import React, { Suspense } from "react";
+import CashMonsterHomePage from "@/components/CashMonsterHomePage";
+import { ModeToggle } from "@/components/mode-toggle";
 
 /**
- * Home page component - Main loan application
- * @returns {JSX.Element} Home page with loan form
+ * Main page component for Cash Money loan offers
+ * @returns {JSX.Element} The rendered page
  */
-export default function Home() {
+export default function Page() {
   return (
-    <main className="relative">
+    <div className="relative">
       {/* Theme toggle in top-right corner */}
       <div className="absolute top-4 right-4 z-10">
         <ModeToggle />
       </div>
       
-      {/* Main loan application form */}
-      <LoanApplicationForm />
-    </main>
-  )
+      <Suspense fallback={
+        <div className="flex items-center justify-center h-screen">
+          <div className="animate-pulse text-xl font-semibold">Loading...</div>
+        </div>
+      }>
+        <CashMonsterHomePage />
+      </Suspense>
+    </div>
+  );
 }
