@@ -58,6 +58,7 @@ const nextConfig = {
     'localhost',
     '127.0.0.1',
     '0.0.0.0', 
+    '167.71.91.24',
     'cashmoney.monster'
   ],
   
