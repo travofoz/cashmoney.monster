@@ -7,69 +7,63 @@
  * Initial form data structure based on GCL API requirements
  */
 export const initialFormData = {
-  // Step 1: Introduction (tracking parameters)
-  transaction_id: '',
-  source: '',
+  // Tracking parameters from URL
+  aid: '', // affiliate ID
+  cid: '', // campaign ID
+  clkid: '', // click ID
+  arid: '', // affiliate reference ID
+  sub1: '', // sub ID 1
+  sub2: '', // sub ID 2
   
-  // Step 2: Loan Details
-  loanAmount: '',
+  // Step 1: Loan Amount
+  loanAmount: '500',
+  
+  // Step 2: Loan Purpose
   loanPurpose: '',
-  employmentStatus: '',
   
   // Step 3: Personal Information
   firstName: '',
   lastName: '',
   email: '',
-  homePhone: '',
+  emailOptin: '0',
   mobilePhone: '',
-  gender: '',
-  dateOfBirth: '',
-  ssn: '',
+  preferredPronouns: '',
+  
+  // Step 4: Address
   address: '',
   city: '',
   state: '',
   zip: '',
-  residenceType: '', // 'Rent' or 'Own'
-  timeAtResidence: '', // 1-5 scale
-  driversLicense: '',
-  driversLicenseState: '',
-  militaryStatus: false, // true/false for ACTIVE_MILITARY
+  homeStatus: '',
+  timeAtResidence: '',
+  dateOfBirth: '',
   
-  // Step 4: Financial Information  
+  // Step 5: Employment
+  employmentStatus: '',
+  employerName: '',
+  workPhone: '',
+  paycheckAmount: '', // AVGSALARY - gross paycheck amount
+  monthlyIncome: '', // calculated from paycheck + frequency
+  payFrequency: '',
+  timeAtJob: '',
+  nextPayDate: '',
+  
+  // Step 6: Banking & Identity
   bankName: '',
   routingNumber: '',
   accountNumber: '',
-  accountType: '', // 'checking' or 'savings'
-  paymentMethod: '', // DC, DS, PC, PS
-  timeAtBank: '', // 1-5 scale
-  employerName: '',
-  employerAddress: '',
-  employerZip: '',
-  employerPhone: '',
-  timeAtJob: '', // 1-5 scale
-  grossPay: '',
-  payPeriod: '', // W, B, S, M
-  incomeType: '', // P, G, M, W, D, S, L, U
-  nextPayDate: '',
+  accountType: '',
+  timeAtBank: '',
+  driverLicenseNumber: '',
+  driverLicenseState: '',
+  ssn: '',
   
-  // Step 5: Additional Details
-  reference1Name: '',
-  reference1LastName: '',
-  reference1Relationship: '',
-  reference1Phone: '',
-  reference2Name: '',
-  reference2LastName: '',
-  reference2Relationship: '',
-  reference2Phone: '',
-  bestTimeToCall: '', // AM, NN, PM
-  emailOptIn: false,
-  titleLoanInterest: false,
+  // Step 7: Final Agreement
+  activeMilitary: '0',
+  tcpaPhone: '',
+  tcpaConsent: '0',
   
-  // Step 6: TCPA Consent
-  tcpa: false,
-  tcpaLanguage: 'By submitting this form, I agree to receive phone calls and text messages from this company and its partners regarding loan offers.',
-  
-  // Tracking fields
+  // Technical tracking fields
   userAgent: '',
   ipAddress: '',
   websiteName: 'cashmoney.monster'
@@ -129,40 +123,38 @@ export function clearFormData() {
  * @returns {number} Current step (1-6)
  */
 export function getCurrentStep(formData) {
-  // Step 1: Introduction - always accessible
-  
-  // Step 2: Loan Details
-  if (!formData.loanAmount || !formData.employmentStatus) {
-    return 2;
+  // Step 1: Loan Details (amount and purpose)
+  if (!formData.loanAmount || !formData.loanPurpose) {
+    return 1;
   }
   
-  // Step 3: Personal Information
+  // Step 2: Personal Information
   if (!formData.firstName || !formData.lastName || !formData.email || 
       !formData.homePhone || !formData.dateOfBirth || !formData.ssn ||
       !formData.address || !formData.city || !formData.state || !formData.zip) {
+    return 2;
+  }
+  
+  // Step 3: Employment & Financial Information
+  if (!formData.employmentStatus || !formData.bankName || !formData.routingNumber || 
+      !formData.accountNumber || !formData.employerName || !formData.grossPay || 
+      !formData.payPeriod || !formData.nextPayDate) {
     return 3;
   }
   
-  // Step 4: Financial Information
-  if (!formData.bankName || !formData.routingNumber || !formData.accountNumber ||
-      !formData.employerName || !formData.grossPay || !formData.payPeriod ||
-      !formData.nextPayDate) {
+  // Step 4: Additional Details
+  if (!formData.reference1Name || !formData.reference1Phone ||
+      !formData.reference2Name || !formData.reference2Phone) {
     return 4;
   }
   
-  // Step 5: Additional Details
-  if (!formData.reference1Name || !formData.reference1Phone ||
-      !formData.reference2Name || !formData.reference2Phone) {
+  // Step 5: TCPA Consent
+  if (!formData.tcpa) {
     return 5;
   }
   
-  // Step 6: TCPA Consent
-  if (!formData.tcpa) {
-    return 6;
-  }
-  
   // All steps complete
-  return 6;
+  return 5;
 }
 
 /**
@@ -174,26 +166,23 @@ export function getCurrentStep(formData) {
 export function canProgressFromStep(step, formData) {
   switch (step) {
     case 1:
-      return true; // Introduction step is always passable
+      return formData.loanAmount && formData.loanPurpose;
     
     case 2:
-      return formData.loanAmount && formData.employmentStatus;
-    
-    case 3:
       return formData.firstName && formData.lastName && formData.email &&
              formData.homePhone && formData.dateOfBirth && formData.ssn &&
              formData.address && formData.city && formData.state && formData.zip;
     
-    case 4:
-      return formData.bankName && formData.routingNumber && formData.accountNumber &&
-             formData.employerName && formData.grossPay && formData.payPeriod &&
-             formData.nextPayDate;
+    case 3:
+      return formData.employmentStatus && formData.bankName && formData.routingNumber && 
+             formData.accountNumber && formData.employerName && formData.grossPay && 
+             formData.payPeriod && formData.nextPayDate;
     
-    case 5:
+    case 4:
       return formData.reference1Name && formData.reference1Phone &&
              formData.reference2Name && formData.reference2Phone;
     
-    case 6:
+    case 5:
       return formData.tcpa;
     
     default:
@@ -207,11 +196,11 @@ export function canProgressFromStep(step, formData) {
  * @returns {number} Completion percentage (0-100)
  */
 export function getFormCompletionPercentage(formData) {
-  const totalSteps = 6;
+  const totalSteps = 5;
   const currentStep = getCurrentStep(formData);
   
   // If on the last step and TCPA is checked, 100% complete
-  if (currentStep === 6 && formData.tcpa) {
+  if (currentStep === 5 && formData.tcpa) {
     return 100;
   }
   
@@ -225,70 +214,72 @@ export function getFormCompletionPercentage(formData) {
  * @returns {Object} Formatted data for API
  */
 export function formatForGCLAPI(formData) {
+  // Clean phone numbers
+  const cleanPhone = (phone) => phone ? phone.replace(/\D/g, '') : '0000000000';
+
   return {
     // Required tracking fields
     SourceID: process.env.NEXT_PUBLIC_GCL_SOURCE_ID,
     Partner: process.env.NEXT_PUBLIC_GCL_PARTNER,
-    AID: 'cashmoney-monster',
+    AID: formData.aid || 'cashmoney-monster',
     
-    // Customer information
+    // Additional tracking parameters
+    CID: formData.cid || '',
+    CLKID: formData.clkid || '',
+    ARID: formData.arid || '',
+    SUB1: formData.sub1 || '',
+    SUB2: formData.sub2 || '',
+    
+    // Required customer information
+    CUSTGENDER: formData.preferredPronouns || 'M',
     CUSTFNAME: formData.firstName,
     CUSTLNAME: formData.lastName,
-    CUSTGENDER: formData.gender === 'male' ? 'M' : 'F',
-    CUSTEMAIL: formData.email,
-    CUSTHOMEPHONE: formData.homePhone.replace(/\D/g, ''),
-    CUSTMOBILEPHONE: formData.mobilePhone?.replace(/\D/g, '') || '',
     CUSTZIP: formData.zip,
     CUSTCITY: formData.city,
     CUSTSTATE: formData.state,
-    CUSTDOB: formData.dateOfBirth,
-    CUSTSSN: formData.ssn.replace(/\D/g, ''),
-    CUSTADD1: formData.address,
-    CUSTDLNO: formData.driversLicense,
-    CUSTDLSTATE: formData.driversLicenseState,
-    
-    // Banking information
+    CUSTHOMEPHONE: cleanPhone(formData.tcpaPhone || formData.mobilePhone),
+    CUSTEMAIL: formData.email,
+    HOWPAID: 'DC', // Default to Direct Deposit to Checking
     CUSTBANKNAME: formData.bankName,
-    CUSTABANO: formData.routingNumber.replace(/\D/g, ''),
+    CUSTABANO: cleanPhone(formData.routingNumber),
     CUSTACCTNO: formData.accountNumber,
-    HOWPAID: formData.paymentMethod,
-    TIMEATBANK: formData.timeAtBank,
-    
-    // Employment information
+    TIMEATBANK: formData.timeAtBank || '3',
+    LOANAMOUNT: formData.loanAmount,
+    CUSTSSN: cleanPhone(formData.ssn),
+    CUSTADD1: formData.address,
+    TIMEATRESIDENCE: formData.timeAtResidence || '3',
+    CUSTMOBILEPHONE: cleanPhone(formData.tcpaPhone || formData.mobilePhone),
+    HOMESTATUS: formData.homeStatus,
+    CUSTDLNO: formData.driverLicenseNumber,
+    CUSTDLSTATE: formData.driverLicenseState,
+    CUSTDOB: formData.dateOfBirth,
     EMPNAME: formData.employerName,
-    EMPADD1: formData.employerAddress,
-    EMPZIP: formData.employerZip,
-    CUSTWORKPHONE: formData.employerPhone?.replace(/\D/g, '') || '',
-    TIMEATJOB: formData.timeAtJob,
-    AVGSALARY: formData.grossPay,
-    PERIODICITY: formData.payPeriod,
-    TYPEOFINCOME: formData.incomeType,
+    ACTIVE_MILITARY: formData.activeMilitary || '0',
+    TIMEATJOB: formData.timeAtJob || '3',
+    CUSTWORKPHONE: cleanPhone(formData.workPhone),
+    
+    // Employment and income information
+    AVGSALARY: formData.paycheckAmount ? formData.paycheckAmount.replace(/[^0-9]/g, '') : '750',
+    MONTHLYINCOME: formData.monthlyIncome ? formData.monthlyIncome.replace(/[^0-9]/g, '') : '1500',
+    PERIODICITY: formData.payFrequency || 'B',
+    TYPEOFINCOME: formData.employmentStatus || 'P',
     NEXTPAYDATE: formData.nextPayDate,
     
-    // Loan details
-    LOANAMOUNT: formData.loanAmount,
+    // References - sending 'Not Collected' as per spec
+    REFFNAME: 'Not Collected',
+    REFLNAME: 'Not Collected',
+    REFRELATION: 'Not Collected',
+    REFHOMEPHONE: '0000000000',
+    REFFNAME2: 'Not Collected',
+    REFLNAME2: 'Not Collected',
+    REFRELATION2: 'Not Collected',
+    REFHOMEPHONE2: '0000000000',
     
-    // References
-    REFFNAME: formData.reference1Name,
-    REFLNAME: formData.reference1LastName,
-    REFRELATION: formData.reference1Relationship,
-    REFHOMEPHONE: formData.reference1Phone.replace(/\D/g, ''),
-    REFFNAME2: formData.reference2Name,
-    REFLNAME2: formData.reference2LastName,
-    REFRELATION2: formData.reference2Relationship,
-    REFHOMEPHONE2: formData.reference2Phone.replace(/\D/g, ''),
-    
-    // Additional fields
-    HOMESTATUS: formData.residenceType,
-    TIMEATRESIDENCE: formData.timeAtResidence,
-    ACTIVE_MILITARY: formData.militaryStatus ? '1' : '0',
-    CUSTCONTACTTIME: formData.bestTimeToCall,
-    EMAIL_OPTIN: formData.emailOptIn ? '1' : '0',
-    TITLE_OPTION: formData.titleLoanInterest ? '1' : '0',
-    
-    // Technical fields
+    // Technical and optional fields
+    WEBSITENAME: formData.websiteName || 'cashmoney.monster',
     IP: formData.ipAddress,
+    EMAIL_OPTIN: formData.emailOptin || '0',
     USER_AGENT: formData.userAgent,
-    WEBSITENAME: formData.websiteName
+    TITLE_OPTION: '0' // Default to no title loan interest
   };
 }

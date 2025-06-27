@@ -1,0 +1,55 @@
+required fields
+---------------
+
+CUSTGENDER
+CUSTFNAME
+CUSTLNAME
+CUSTZIP
+CUSTCITY
+CUSTSTATE
+CUSTHOMEPHONE
+CUSTEMAIL
+HOWPAID
+CUSTABANO
+CUSTACCTNO
+TIMEATBANK
+LOANAMOUNT
+CUSTSSN
+CUSTADD1
+TIMEATRESIDENCE
+CUSTMOBILEPHONE
+CUSTDLNO
+CUSTDLSTATE
+CUSTDOB
+EMPNAME
+ACTIVE_MILITARY
+TIMEATJOB
+CUSTWORKPHONE
+AVGSALARY 
+PERIODICITY
+TYPEOFINCOME
+NEXTPAYDATE
+WEBSITENAME
+IP
+EMAIL_OPTIN
+USER_AGENT
+
+optional fields we capture
+--------------------------
+CUSTCONTACTTIME
+TITLE_OPTION
+DEBT
+
+
+
+notes
+-----
+AVGSALARY  -- Gross amount of last paycheck before taxes are taken out.    *****Very important that this is amount of paycheck and not monthly salary. ( you will have to calculate based on their paycheck amount. there should be a hover tool tip or something for these fields too where appropriate [not all of them obviously]
+DEBT   --- do you have 10k in unsecured debt (1 or 0); not in the spec but add it.
+
+CUSTGENDER -- this is tricky to collect but i have an idea. technically we are not allowed to collect this for loans, but we might sell the lead as not a loan so its required. what if we collect preferred pronouns and (offered he/him she/her they/them) but he and they = M and she = F
+
+get rid of the reference and other nonsense.
+
+
+

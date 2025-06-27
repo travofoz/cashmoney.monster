@@ -11,6 +11,18 @@ import FormInput from './FormInput';
  * @returns {JSX.Element} Financial information form step
  */
 export default function FinancialInfoStep({ formData, onChange }) {
+  const employmentStatusOptions = [
+    'Employed Full-Time',
+    'Employed Part-Time',
+    'Self-Employed',
+    'Social Security',
+    'Military',
+    'Disability Benefits',
+    'Pension',
+    'Unemployed',
+    'Other'
+  ];
+
   const accountTypeOptions = [
     { value: 'checking', label: 'Checking' },
     { value: 'savings', label: 'Savings' }
@@ -59,6 +71,20 @@ export default function FinancialInfoStep({ formData, onChange }) {
 
   return (
     <div className="space-y-6">
+      <div className="space-y-4">
+        <h3 className="text-lg font-semibold">Employment Status</h3>
+        
+        <FormInput
+          name="employmentStatus"
+          label="What is your employment status?"
+          value={formData.employmentStatus}
+          onChange={onChange}
+          options={employmentStatusOptions}
+          required={true}
+          placeholder="Select employment status"
+        />
+      </div>
+      
       <div className="space-y-4">
         <h3 className="text-lg font-semibold">Banking Information</h3>
         

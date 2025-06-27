@@ -1,0 +1,114 @@
+GulfCoastLeads Outside Posts - XML Response
+
+
+The customer MUST be present on your website when you redirect them to us, because GulfCoastLeads will generate a Redirect URL where you will have to forward the customer.    Statistics will be maintained on redirect success rates.
+
+IMPORTANT:    Please take measures to ensure that the customer is only able to submit the application once.
+
+POSTING URL
+https://www.submitlead.com/cash/1.6/
+
+TRACKING VARIABLES
+This information must be sent in order for the lead to track correctly in our system:
+
+(* denotes required values)
+SourceID*	provided by GulfCoastLeads
+Partner*	provided by GulfCoastLeads
+
+
+REQUIRED CUSTOMER INFORMATION
+AID	Your affiliate that generated the lead, varchar(128)
+CUSTGENDER*	"M" or "F"
+CUSTFNAME*	First Name
+CUSTLNAME*	Last Name
+CUSTZIP*	Customer's Zip (5 digit) 
+CUSTCITY*	Customer's City
+CUSTSTATE	Customer's State
+CUSTHOMEPHONE*	format "1234567890"
+CUSTEMAIL*	Email Address (email@email.com)
+HOWPAID*	DC = Direct Deposit to Checking
+DS = Direct Deposit to Savings
+PC = Paper Check to Checking
+PS = Paper Check to Savings
+CUSTBANKNAME*	Bank Name
+CUSTABANO*	Bank ABA/Routing Number
+CUSTACCTNO*	Bank Account Number
+TIMEATBANK*	1 = 0 years, 3 months
+2 = 0 years, 6 months
+3 = 1 years, 0 months
+4 = 2 years, 0 months
+5 = 3 years, 0 months +
+LOANAMOUNT*	100 up to 1000 (in increments of 100)
+CUSTSSN*	Customer's SSN, no dashes
+CUSTADD1*	Customer's Address
+TIMEATRESIDENCE*	1 = 0 years, 3 months
+2 = 0 years, 6 months
+3 = 1 years, 0 months
+4 = 2 years, 0 months
+5 = 3 years, 0 months +
+CUSTMOBILEPHONE	format "1234567890"
+HOMESTATUS*	"Rent" or "Own"
+CUSTDLNO*	Customer's Driver's License number
+CUSTDLSTATE*	Customer's Driver's License State
+CUSTDOB*	format "mm/dd/yyyy"
+EMPNAME*	Employer Name
+ACTIVE_MILITARY*	1 for yes, 0 for no
+TIMEATJOB*	1 = 0 years, 3 months
+2 = 0 years, 6 months
+3 = 1 years, 0 months
+4 = 2 years, 0 months
+5 = 3 years, 0 months +
+CUSTWORKPHONE*	format "1234567890"
+EMPADD1	Employer's Address
+EMPZIP	Employer's Zip (5 digits)
+AVGSALARY*	Gross amount of last paycheck before taxes are taken out.    *****Very important that this is amount of paycheck and not monthly salary.
+PERIODICITY*	How often customer gets paid.    Options are W = Weekly, B = BiWeekly, S = SemiMonthly, M = Monthly
+CUSTCONTACTTIME	AM = morning
+NN = afternoon
+PM = evening
+TYPEOFINCOME*	P = Employed
+G = Social Security
+M = Military
+W = Welfare
+D = Disability
+S = Pension
+L = Self Employed
+U = Unemployment
+NEXTPAYDATE*	Format mm/dd/yyyy
+REFFNAME	First Name of Reference 1 see below
+REFLNAME	Last Name of Reference 1 see below
+REFRELATION	Coworker, Parent, Sibling, Friend, Other
+REFHOMEPHONE	Sent in format "1234567890" see below
+REFFNAME2	First Name of Reference 2 see below
+REFLNAME2	Last Name of Reference 2 see below
+REFRELATION2	Coworker, Parent, Sibling, Friend, Other
+REFHOMEPHONE2	Sent in format "1234567890" see below
+WEBSITENAME*	www.application.com
+IP*	Applicant's IP address
+EMAIL_OPTIN*	1 for yes, 0 for no
+USER_AGENT*	HTTP User Agent of the consumer
+TITLE_OPTION	1 for yes, 0 for no. The consumer must have indicated that 1) They own a vehicle or have a clear title in their name and 2) They are interested in using that tile to obtain a loan 
+
+References: Pass 'Not Collected' for Name/Relationship and '0000000000' for phone if this information is not collected, or you may omit the field completely.
+
+SAMPLE LINK
+https://www.submitlead.com/cash/1.6/?SourceID=[provided_by_GulfCoastLeads]&Partner=[provided_by_GulfCoastLeads]&AID=[your_affiliate_code]&CUSTGENDER=M&CUSTFNAME=Test&CUSTLNAME=McTester&CUSTZIP=33333&CUSTHOMEPHONE=4043570000&CUSTEMAIL=mctst@mctster.com&HOWPAID=DC&CUSTBANKNAME=Chase&CUSTABANO=123123123&CUSTACCTNO=123123123&TIMEATBANK=1&LOANAMOUNT=100&CUSTSSN=123456789&CUSTADD1=123 Main Street&TIMEATRESIDENCE=1&CUSTMOBILEPHONE=8882220000&HOMESTATUS=Own&CUSTDLNO=12345678&CUSTDLSTATE=TX&CUSTDOB=05/14/1965&EMPNAME=TestCompany&ACTIVE_MILITARY=0&TIMEATJOB=3&CUSTWORKPHONE=8885550000&EMPADD1=123 Test St.&EMPZIP=33333&AVGSALARY=1900&PERIODICITY=B&CUSTCONTACTTIME=NN&TYPEOFINCOME=P&NEXTPAYDATE=10/14/2007&REFFNAME=Test&REFLNAME=Test&REFRELATION=Friend&REFHOMEPHONE=8885551111&REFFNAME2=Test2&REFLNAME2=Test2&REFRELATION2=Friend&REFHOMEPHONE2=8885552222&IP=192.168.0.100&WEBSITENAME=www.testsite.com&EMAIL_OPTIN=1&USER_AGENT=Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/56.0.2924.87 Safari/537.36&TITLE_OPTION=0
+
+(In production, please use the POST method instead of the GET method for security purposes)
+
+
+Possible Responses:
+
+Accepted Response:
+<GulfCoastLeadsResponse>
+<Result>ACCEPTED:</Result>
+<RedirectURL><![CDATA[http://www.redirecturl.com?auth=123]]></RedirectURL>
+<Price>7.50</Price>
+</GulfCoastLeadsResponse>
+
+Rejected Response:
+<GulfCoastLeadsResponse>
+<Result>REJECTED:</Result>
+<Message>Rejection Reason or Error Message</Message>
+</GulfCoastLeadsResponse>
+

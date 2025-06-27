@@ -5,6 +5,7 @@
 
 /**
  * Validate Social Security Number
+ * Follows SSA rules: no 000, 666, or 900-999 area numbers; no 00 group; no 0000 serial
  * @param {string} ssn - SSN to validate (no dashes)
  * @returns {boolean} True if valid
  */
@@ -12,11 +13,27 @@ export function validateSSN(ssn) {
   if (!ssn) return false;
   // Remove any non-digit characters
   const cleaned = ssn.replace(/\D/g, '');
-  // Must be exactly 9 digits, not all zeros, not sequential
-  return cleaned.length === 9 && 
-         cleaned !== '000000000' && 
-         cleaned !== '123456789' &&
-         !/^(\d)\1{8}$/.test(cleaned); // Not all same digit
+  if (cleaned.length !== 9) return false;
+  
+  // Parse area, group, and serial numbers
+  const area = parseInt(cleaned.substring(0, 3));
+  const group = parseInt(cleaned.substring(3, 5));
+  const serial = parseInt(cleaned.substring(5, 9));
+  
+  // Invalid area numbers
+  if (area === 0 || area === 666 || area >= 900) return false;
+  
+  // Invalid group number
+  if (group === 0) return false;
+  
+  // Invalid serial number
+  if (serial === 0) return false;
+  
+  // Additional invalid patterns
+  if (cleaned === '123456789' || cleaned === '987654321') return false;
+  if (/^(\d)\1{8}$/.test(cleaned)) return false; // All same digit
+  
+  return true;
 }
 
 /**
@@ -107,22 +124,44 @@ export function validateLoanAmount(amount) {
 }
 
 /**
- * Validate next pay date
- * @param {string} date - Date in MM/DD/YYYY format
- * @returns {boolean} True if valid and in the future
+ * Validate next pay date based on pay frequency
+ * @param {string} date - Date in YYYY-MM-DD format (HTML date input)
+ * @param {string} payFrequency - Pay frequency (Weekly, Bi-Weekly, Semi-Monthly, Monthly)
+ * @returns {boolean} True if valid and within reasonable range
  */
-export function validateNextPayDate(date) {
+export function validateNextPayDate(date, payFrequency = 'Bi-Weekly') {
   if (!date) return false;
   
-  const dateRegex = /^(0[1-9]|1[0-2])\/(0[1-9]|[12]\d|3[01])\/\d{4}$/;
-  if (!dateRegex.test(date)) return false;
+  // Handle both YYYY-MM-DD and MM/DD/YYYY formats
+  let payDate;
+  if (date.includes('-')) {
+    // YYYY-MM-DD format from HTML date input
+    payDate = new Date(date);
+  } else {
+    // MM/DD/YYYY format
+    const [month, day, year] = date.split('/').map(Number);
+    payDate = new Date(year, month - 1, day);
+  }
   
-  const [month, day, year] = date.split('/').map(Number);
-  const payDate = new Date(year, month - 1, day);
   const today = new Date();
-  today.setHours(0, 0, 0, 0); // Reset time for date comparison
+  today.setHours(0, 0, 0, 0);
+  payDate.setHours(0, 0, 0, 0);
   
-  return payDate >= today && payDate <= new Date(today.getTime() + 365 * 24 * 60 * 60 * 1000);
+  // Must be today or in the future
+  if (payDate < today) return false;
+  
+  // Set max days based on pay frequency
+  let maxDays;
+  switch (payFrequency) {
+    case 'Weekly': maxDays = 14; break;        // Up to 2 weeks
+    case 'Bi-Weekly': maxDays = 21; break;     // Up to 3 weeks  
+    case 'Semi-Monthly': maxDays = 35; break;  // Up to 5 weeks
+    case 'Monthly': maxDays = 60; break;       // Up to 2 months
+    default: maxDays = 21; break;              // Default to bi-weekly
+  }
+  
+  const maxDate = new Date(today.getTime() + maxDays * 24 * 60 * 60 * 1000);
+  return payDate <= maxDate;
 }
 
 /**

@@ -59,7 +59,8 @@ const nextConfig = {
     '127.0.0.1',
     '0.0.0.0', 
     '167.71.91.24',
-    'cashmoney.monster'
+    'cashmoney.monster',
+    '172.21.99.160'
   ],
   
   // Necessary for framer-motion with newer Next.js

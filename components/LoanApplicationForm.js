@@ -63,7 +63,7 @@ export default function LoanApplicationForm() {
       return;
     }
 
-    if (currentStep < 6) {
+    if (currentStep < 5) {
       setCurrentStep(prev => prev + 1);
     }
   };
@@ -134,37 +134,27 @@ export default function LoanApplicationForm() {
       case 1:
         return (
           <FormStep
-            title="Get Your Cash Today"
-            description="Quick approval for payday, personal, and installment loans up to $1,000."
+            title="Loan Details"
+            description="How much do you need and what's it for?"
             stepNumber={1}
-            totalSteps={6}
+            totalSteps={5}
           >
-            <div className="text-center space-y-4">
-              <div className="bg-primary/10 p-6 rounded-lg">
-                <h3 className="text-lg font-semibold mb-2">Fast & Secure Application</h3>
-                <ul className="text-left space-y-2 text-muted-foreground">
-                  <li>✓ Quick 5-minute application</li>
-                  <li>✓ Instant approval decisions</li>
-                  <li>✓ Funds deposited same day</li>
-                  <li>✓ Secure & confidential</li>
-                </ul>
-              </div>
-              <p className="text-sm text-muted-foreground">
-                Click &ldquo;Get Started&rdquo; to begin your loan application.
-              </p>
-            </div>
+            <LoanDetailsStep 
+              formData={formData}
+              onChange={handleFieldChange}
+            />
           </FormStep>
         );
 
       case 2:
         return (
           <FormStep
-            title="Loan Details"
-            description="Tell us about the loan you need and your employment status."
+            title="Personal Information"
+            description="We need some basic information to verify your identity."
             stepNumber={2}
-            totalSteps={6}
+            totalSteps={5}
           >
-            <LoanDetailsStep 
+            <PersonalInfoStep 
               formData={formData}
               onChange={handleFieldChange}
             />
@@ -174,12 +164,12 @@ export default function LoanApplicationForm() {
       case 3:
         return (
           <FormStep
-            title="Personal Information"
-            description="We need some basic information to verify your identity."
+            title="Employment & Financial Information"
+            description="Employment status, banking and income details for loan processing."
             stepNumber={3}
-            totalSteps={6}
+            totalSteps={5}
           >
-            <PersonalInfoStep 
+            <FinancialInfoStep 
               formData={formData}
               onChange={handleFieldChange}
             />
@@ -189,12 +179,12 @@ export default function LoanApplicationForm() {
       case 4:
         return (
           <FormStep
-            title="Financial Information"
-            description="Banking and employment details for loan processing."
+            title="Additional Details"
+            description="References and contact preferences to complete your application."
             stepNumber={4}
-            totalSteps={6}
+            totalSteps={5}
           >
-            <FinancialInfoStep 
+            <AdditionalDetailsStep 
               formData={formData}
               onChange={handleFieldChange}
             />
@@ -204,25 +194,10 @@ export default function LoanApplicationForm() {
       case 5:
         return (
           <FormStep
-            title="Additional Details"
-            description="References and contact preferences to complete your application."
-            stepNumber={5}
-            totalSteps={6}
-          >
-            <AdditionalDetailsStep 
-              formData={formData}
-              onChange={handleFieldChange}
-            />
-          </FormStep>
-        );
-
-      case 6:
-        return (
-          <FormStep
             title="Review & Submit"
             description="Please review your information and agree to our terms."
-            stepNumber={6}
-            totalSteps={6}
+            stepNumber={5}
+            totalSteps={5}
           >
             <TCPAConsentStep 
               formData={formData}
@@ -237,46 +212,44 @@ export default function LoanApplicationForm() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-primary/20 to-secondary/20 py-8">
-      <div className="container mx-auto px-4">
-        <FormProgress 
-          formData={formData}
-          currentStep={currentStep}
-          totalSteps={6}
-        />
+    <div className="space-y-6">
+      <FormProgress 
+        formData={formData}
+        currentStep={currentStep}
+        totalSteps={5}
+      />
+      
+      {renderStepContent()}
+      
+      <div className="flex justify-between mt-6">
+        <Button
+          variant="outline"
+          onClick={handlePrevious}
+          disabled={currentStep === 1}
+          className="flex items-center gap-2"
+        >
+          <ArrowLeft className="w-4 h-4" />
+          Previous
+        </Button>
         
-        {renderStepContent()}
-        
-        <div className="flex justify-between max-w-2xl mx-auto mt-6">
+        {currentStep < 5 ? (
           <Button
-            variant="outline"
-            onClick={handlePrevious}
-            disabled={currentStep === 1}
+            onClick={handleNext}
+            disabled={!canProgressFromStep(currentStep, formData)}
             className="flex items-center gap-2"
           >
-            <ArrowLeft className="w-4 h-4" />
-            Previous
+            Next Step
+            <ArrowRight className="w-4 h-4" />
           </Button>
-          
-          {currentStep < 6 ? (
-            <Button
-              onClick={handleNext}
-              disabled={!canProgressFromStep(currentStep, formData)}
-              className="flex items-center gap-2"
-            >
-              {currentStep === 1 ? 'Get Started' : 'Next Step'}
-              <ArrowRight className="w-4 h-4" />
-            </Button>
-          ) : (
-            <Button
-              onClick={handleSubmit}
-              disabled={!formData.tcpa || isLoading}
-              className="flex items-center gap-2"
-            >
-              {isLoading ? 'Submitting...' : 'Submit Application'}
-            </Button>
-          )}
-        </div>
+        ) : (
+          <Button
+            onClick={handleSubmit}
+            disabled={!formData.tcpa || isLoading}
+            className="flex items-center gap-2"
+          >
+            {isLoading ? 'Submitting...' : 'Submit Application'}
+          </Button>
+        )}
       </div>
     </div>
   );

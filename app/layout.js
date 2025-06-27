@@ -1,9 +1,8 @@
-import { Inter } from 'next/font/google'
 import './globals.css'
-import { ThemeProvider } from '@/components/theme-provider'
 import { Toaster } from 'react-hot-toast'
-
-const inter = Inter({ subsets: ['latin'] })
+import { ThemeProvider, ModeToggle } from '@/components/theme-provider'
+import Footer from '@/components/Footer'
+import MonsterPeekaboo from '@/components/MonsterPeekaboo'
 
 /**
  * Root layout component
@@ -14,25 +13,33 @@ const inter = Inter({ subsets: ['latin'] })
 export default function RootLayout({ children }) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className={inter.className}>
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="system"
-          enableSystem
-          disableTransitionOnChange
-        >
+      <head>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              try {
+                const savedTheme = localStorage.getItem('ui-theme');
+                let theme;
+                if (savedTheme) {
+                  theme = savedTheme;
+                } else {
+                  // No saved preference, use system preference
+                  theme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+                }
+                document.documentElement.classList.remove('light', 'dark');
+                document.documentElement.classList.add(theme);
+              } catch (e) {}
+            `,
+          }}
+        />
+      </head>
+      <body suppressHydrationWarning>
+        <ThemeProvider defaultTheme="system">
+          <Toaster position="top-center" />
           {children}
-          <Toaster 
-            position="top-right"
-            toastOptions={{
-              duration: 4000,
-              style: {
-                background: 'hsl(var(--background))',
-                color: 'hsl(var(--foreground))',
-                border: '1px solid hsl(var(--border))',
-              },
-            }}
-          />
+          <Footer />
+          <ModeToggle />
+          <MonsterPeekaboo />
         </ThemeProvider>
       </body>
     </html>

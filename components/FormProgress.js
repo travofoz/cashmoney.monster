@@ -15,7 +15,7 @@ import { getFormCompletionPercentage } from '@/utils/formState';
 export default function FormProgress({ 
   formData, 
   currentStep = 1, 
-  totalSteps = 6 
+  totalSteps = 5 
 }) {
   const completionPercentage = getFormCompletionPercentage(formData);
   
@@ -61,7 +61,6 @@ export default function FormProgress({
       </div>
       
       <div className="flex justify-between mt-1 text-xs text-muted-foreground">
-        <span>Start</span>
         <span>Loan</span>
         <span>Personal</span>
         <span>Financial</span>

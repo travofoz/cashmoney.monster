@@ -2,6 +2,8 @@
 
 import React from 'react';
 import FormInput from './FormInput';
+import { Slider } from '@/components/ui/slider';
+import { Label } from '@/components/ui/label';
 
 /**
  * Step 2: Loan Details
@@ -11,18 +13,9 @@ import FormInput from './FormInput';
  * @returns {JSX.Element} Loan details form step
  */
 export default function LoanDetailsStep({ formData, onChange }) {
-  const loanAmountOptions = [
-    { value: '100', label: '$100' },
-    { value: '200', label: '$200' },
-    { value: '300', label: '$300' },
-    { value: '400', label: '$400' },
-    { value: '500', label: '$500' },
-    { value: '600', label: '$600' },
-    { value: '700', label: '$700' },
-    { value: '800', label: '$800' },
-    { value: '900', label: '$900' },
-    { value: '1000', label: '$1000' }
-  ];
+  const handleSliderChange = (values) => {
+    onChange('loanAmount', values[0].toString());
+  };
 
   const loanPurposeOptions = [
     'Emergency Expense',
@@ -36,29 +29,33 @@ export default function LoanDetailsStep({ formData, onChange }) {
     'Other'
   ];
 
-  const employmentStatusOptions = [
-    'Employed Full-Time',
-    'Employed Part-Time',
-    'Self-Employed',
-    'Social Security',
-    'Military',
-    'Disability Benefits',
-    'Pension',
-    'Unemployed',
-    'Other'
-  ];
 
   return (
     <div className="space-y-6">
-      <FormInput
-        name="loanAmount"
-        label="How much do you need?"
-        value={formData.loanAmount}
-        onChange={onChange}
-        options={loanAmountOptions}
-        required={true}
-        placeholder="Select loan amount"
-      />
+      <div className="space-y-3">
+        <Label className="text-sm font-medium">
+          How much do you need? <span className="text-red-500">*</span>
+        </Label>
+        <div className="space-y-4">
+          <div className="text-center">
+            <span className="text-2xl font-bold text-primary">
+              ${formData.loanAmount || 100}
+            </span>
+          </div>
+          <Slider
+            value={[parseInt(formData.loanAmount) || 100]}
+            onValueChange={handleSliderChange}
+            max={1000}
+            min={100}
+            step={100}
+            className="w-full"
+          />
+          <div className="flex justify-between text-sm text-muted-foreground">
+            <span>$100</span>
+            <span>$1,000</span>
+          </div>
+        </div>
+      </div>
 
       <FormInput
         name="loanPurpose"
@@ -69,26 +66,6 @@ export default function LoanDetailsStep({ formData, onChange }) {
         required={true}
         placeholder="Select purpose"
       />
-
-      <FormInput
-        name="employmentStatus"
-        label="What is your employment status?"
-        value={formData.employmentStatus}
-        onChange={onChange}
-        options={employmentStatusOptions}
-        required={true}
-        placeholder="Select employment status"
-      />
-
-      <div className="bg-muted/50 p-4 rounded-lg">
-        <h4 className="font-medium mb-2">Quick Approval Requirements</h4>
-        <ul className="text-sm text-muted-foreground space-y-1">
-          <li>✓ Be at least 18 years old</li>
-          <li>✓ Have a valid checking account</li>
-          <li>✓ Have a steady source of income</li>
-          <li>✓ Be a US citizen or permanent resident</li>
-        </ul>
-      </div>
     </div>
   );
 }
