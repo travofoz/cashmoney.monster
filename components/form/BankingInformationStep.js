@@ -106,7 +106,7 @@ export default function BankingInformationStep({ formData, onChange }) {
                 size="sm"
                 onClick={confirmBankNameOverride}
               >
-                Yes, I'll Enter Manually
+                Yes, I&apos;ll Enter Manually
               </Button>
             </div>
           </div>

@@ -18,7 +18,7 @@ export default function Privacy() {
             <ul>
               <li>Personal identifiers (name, address, phone number, email)</li>
               <li>Financial information (income, employment, banking details)</li>
-              <li>Government identifiers (Social Security Number, Driver's License)</li>
+              <li>Government identifiers (Social Security Number, Driver&apos;s License)</li>
               <li>Loan preferences and requirements</li>
             </ul>
             

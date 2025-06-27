@@ -786,7 +786,7 @@ export default function Page() {
                 Why Choose Cash Money?
               </h2>
               <p className="text-muted-foreground max-w-2xl mx-auto">
-                Our loan search service is designed to connect you with lenders quickly and securely. Here's why you should choose us:
+                Our loan search service is designed to connect you with lenders quickly and securely. Here&apos;s why you should choose us:
               </p>
             </motion.div>
             

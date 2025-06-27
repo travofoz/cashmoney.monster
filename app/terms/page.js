@@ -13,7 +13,7 @@ export default function Terms() {
             
             <h2>Service Description</h2>
             <p>
-              Cash Money MONSTER ("we," "us," or "our") operates a loan matching service that connects borrowers with independent lenders. We are not a lender and do not make loans directly.
+              Cash Money MONSTER (&quot;we,&quot; &quot;us,&quot; or &quot;our&quot;) operates a loan matching service that connects borrowers with independent lenders. We are not a lender and do not make loans directly.
             </p>
             
             <h2>Eligibility</h2>

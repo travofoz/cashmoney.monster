@@ -11,7 +11,7 @@ export default function Contact() {
           <CardContent className="prose prose-lg max-w-none text-foreground">
             <h2>Get in Touch</h2>
             <p>
-              Have questions about our loan matching service? Need help with an application? We're here to help.
+              Have questions about our loan matching service? Need help with an application? We&apos;re here to help.
             </p>
             
             <h3>Customer Support</h3>
@@ -38,8 +38,8 @@ export default function Contact() {
             <h4>Is there a fee for your service?</h4>
             <p>No, our loan matching service is completely free to borrowers. Lenders pay us when we successfully connect them with qualified borrowers.</p>
             
-            <h4>What if I'm not approved?</h4>
-            <p>If you're not matched with a lender, there's no cost or obligation. You can try again later or explore other financial options.</p>
+            <h4>What if I&apos;m not approved?</h4>
+            <p>If you&apos;re not matched with a lender, there&apos;s no cost or obligation. You can try again later or explore other financial options.</p>
             
             <h4>Is my information secure?</h4>
             <p>Yes, we use bank-level encryption to protect your personal and financial information. We never sell your data to third parties.</p>

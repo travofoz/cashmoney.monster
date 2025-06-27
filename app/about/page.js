@@ -30,7 +30,7 @@ export default function About() {
               <li><strong>Fast:</strong> Get connected with lenders in minutes</li>
               <li><strong>Secure:</strong> Bank-level encryption protects your information</li>
               <li><strong>Free:</strong> Our service is completely free to borrowers</li>
-              <li><strong>No Obligation:</strong> You're never obligated to accept any offer</li>
+              <li><strong>No Obligation:</strong> You&apos;re never obligated to accept any offer</li>
             </ul>
             
             <h3>Important Disclosure</h3>
