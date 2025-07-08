@@ -13,8 +13,34 @@ import { Label } from '@/components/ui/label';
  * @returns {JSX.Element} Loan details form step
  */
 export default function LoanDetailsStep({ formData, onChange }) {
+  const maxLoanAmount = parseInt(process.env.NEXT_PUBLIC_MAX_LOAN_AMOUNT) || 30000;
+  
+  // Generate all valid loan amounts
+  const generateValidAmounts = () => {
+    const amounts = [];
+    // $100 increments from 100 to 1000
+    for (let i = 100; i <= 1000; i += 100) {
+      amounts.push(i);
+    }
+    // $500 increments from 1500 to maxLoanAmount
+    for (let i = 1500; i <= maxLoanAmount; i += 500) {
+      amounts.push(i);
+    }
+    return amounts;
+  };
+
+  const validAmounts = generateValidAmounts();
+
+  const snapToValidAmount = (value) => {
+    // Find the closest valid amount
+    return validAmounts.reduce((prev, curr) => 
+      Math.abs(curr - value) < Math.abs(prev - value) ? curr : prev
+    );
+  };
+
   const handleSliderChange = (values) => {
-    onChange('loanAmount', values[0].toString());
+    const snappedValue = snapToValidAmount(values[0]);
+    onChange('loanAmount', snappedValue.toString());
   };
 
   const loanPurposeOptions = [
@@ -39,20 +65,20 @@ export default function LoanDetailsStep({ formData, onChange }) {
         <div className="space-y-4">
           <div className="text-center">
             <span className="text-2xl font-bold text-primary">
-              ${formData.loanAmount || 100}
+              ${parseInt(formData.loanAmount || 100).toLocaleString()}
             </span>
           </div>
           <Slider
             value={[parseInt(formData.loanAmount) || 100]}
             onValueChange={handleSliderChange}
-            max={1000}
+            max={maxLoanAmount}
             min={100}
             step={100}
             className="w-full"
           />
           <div className="flex justify-between text-sm text-muted-foreground">
             <span>$100</span>
-            <span>$1,000</span>
+            <span>${maxLoanAmount.toLocaleString()}</span>
           </div>
         </div>
       </div>

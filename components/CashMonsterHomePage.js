@@ -13,7 +13,23 @@ import { loadFormData, saveFormData, initialFormData, clearFormData } from "@/ut
 import LoanHero from './LoanHero';
 
 const LoanAmountSlider = ({ value, onChange }) => {
-  const amounts = [100, 200, 300, 400, 500, 600, 700, 800, 900, 1000];
+  const maxLoanAmount = parseInt(process.env.NEXT_PUBLIC_MAX_LOAN_AMOUNT) || 30000;
+  
+  // Generate all valid loan amounts
+  const generateAmounts = () => {
+    const amounts = [];
+    // $100 increments from 100 to 1000
+    for (let i = 100; i <= 1000; i += 100) {
+      amounts.push(i);
+    }
+    // $500 increments from 1500 to maxLoanAmount
+    for (let i = 1500; i <= maxLoanAmount; i += 500) {
+      amounts.push(i);
+    }
+    return amounts;
+  };
+  
+  const amounts = generateAmounts();
   const currentValue = value ? parseInt(value) : 500;
   const sliderIndex = amounts.indexOf(currentValue);
   
@@ -38,7 +54,7 @@ const LoanAmountSlider = ({ value, onChange }) => {
         />
         <div className="flex justify-between text-xs text-muted-foreground mt-2">
           <span>$100</span>
-          <span>$1,000</span>
+          <span>${maxLoanAmount.toLocaleString()}</span>
         </div>
       </div>
     </div>

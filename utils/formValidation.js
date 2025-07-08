@@ -116,11 +116,21 @@ export function validateDOB(dob) {
 /**
  * Validate loan amount
  * @param {number|string} amount - Loan amount
- * @returns {boolean} True if valid (100-1000, step 100)
+ * @returns {boolean} True if valid (100-30000, step 100 up to 1000, then step 500)
  */
 export function validateLoanAmount(amount) {
   const num = typeof amount === 'string' ? parseInt(amount) : amount;
-  return num >= 100 && num <= 1000 && num % 100 === 0;
+  const maxAmount = parseInt(process.env.NEXT_PUBLIC_MAX_LOAN_AMOUNT) || 30000;
+  
+  if (num < 100 || num > maxAmount) return false;
+  
+  // $100 increments from 100-1000
+  if (num <= 1000) {
+    return num % 100 === 0;
+  }
+  
+  // $500 increments from 1000-30000
+  return num % 500 === 0;
 }
 
 /**
@@ -201,7 +211,7 @@ export function getFieldError(fieldName, value) {
       return !value || value.length < 4 ? 'Account number must be at least 4 digits' : null;
     
     case 'loanAmount':
-      return !validateLoanAmount(value) ? 'Loan amount must be $100-$1000 in $100 increments' : null;
+      return !validateLoanAmount(value) ? 'Loan amount must be $100-$30,000 ($100 increments up to $1,000, then $500 increments)' : null;
     
     case 'nextPayDate':
       return !validateNextPayDate(value) ? 'Please enter a valid future pay date' : null;
