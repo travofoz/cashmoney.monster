@@ -48,6 +48,8 @@ const nextConfig = {
   env: {
     CONFIG_ID: '003',
     CONFIG_NAME: 'cashmoney monster',
+    SITE_NAME: 'Cash Money Monster',
+    SITE_SLOGAN: 'Fast payday, personal & installment loans up to $1,000',
     GCL_ENDPOINT: 'https://www.submitlead.com/cash/1.6/',
     GCL_SOURCE_ID: process.env.GCL_SOURCE_ID,
     GCL_PARTNER: process.env.GCL_PARTNER,
