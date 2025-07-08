@@ -14,6 +14,28 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
+        {/* Preload critical LCP hero images */}
+        <link 
+          rel="preload" 
+          as="image" 
+          href="/uploads/cashmoney-hero-1920.webp" 
+          type="image/webp"
+          fetchPriority="high"
+        />
+        <link 
+          rel="preload" 
+          as="image" 
+          href="/uploads/cashmoney-hero-768-portrait.webp" 
+          type="image/webp"
+          media="(max-width: 768px)"
+          fetchPriority="high"
+        />
+        {/* DNS prefetch for external resources */}
+        <link rel="dns-prefetch" href="//fonts.googleapis.com" />
+        <link rel="dns-prefetch" href="//www.submitlead.com" />
+        {/* Preconnect for critical third-parties */}
+        <link rel="preconnect" href="//fonts.gstatic.com" crossOrigin="" />
+        <link rel="preconnect" href="//www.submitlead.com" />
         <script
           dangerouslySetInnerHTML={{
             __html: `
