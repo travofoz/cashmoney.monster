@@ -153,7 +153,7 @@ For more information on how we make money using your data, see our Ad Disclosure
 
 ### To limit our sharing
 
-Call this toll-free number: (800) 245-5626
+Call this toll-free number: 614-502-9079
 
 Email us atsupport@CashMoney.Monster
 
@@ -173,7 +173,7 @@ For questions please contact us at:
 
 BadCreditLoans.com
 
-(800) 245-5626
+614-502-9079
 
 support@CashMoney.Monster
 
@@ -256,7 +256,17 @@ We do not knowingly collect or disclose information from children under the age 
 
 ### Unsubscribe
 
-You can remove your information from our contact list at any time with no questions asked. To remove your information from our database to no longer receive future communications from us, please contact us using the contact information provided below.
+You can remove your information from our contact list at any time with no questions asked. To remove your information from our database to no longer receive future communications from us, you have several options:
+
+**General Unsubscribe:** Visit https://leadplateau.com/unsubscribe to submit an unsubscribe request online.
+
+**Email:** Send an email to support@CashMoney.Monster with "Unsubscribe" in the subject line.
+
+**Phone:** Call 614-502-9079 to speak with a customer service representative.
+
+**Processing Time:** Unsubscribe requests are typically processed within 3-5 business days. You may receive communications that were already scheduled before your request was processed.
+
+**California Residents:** For California-specific privacy rights including "Do Not Sell My Personal Information" requests, please see our California Privacy Rights page or contact us using the methods described in the "For California Residents Only" section below.
 
 ### Updates
 
@@ -287,7 +297,7 @@ We may deny your deletion request if retaining the information is necessary for 
 
 ### Exercising Access, Data Portability, and Deletion Rights
 
-To exercise the access, data portability, and deletion rights described above, please submit a verifiable consumer request to us by sending an email to support@CashMoney.Monster with the exact subject line “California Resident Exercising Access, Data Portability, or Deletion Rights” or by calling (800) 245-5626.
+To exercise the access, data portability, and deletion rights described above, please submit a verifiable consumer request to us by sending an email to support@CashMoney.Monster with the exact subject line “California Resident Exercising Access, Data Portability, or Deletion Rights” or by calling 614-502-9079.
 
 Only you, or a person registered with the California Secretary of State that you authorize to act on your behalf, may make a verifiable consumer request related to your personal information.
 
@@ -301,7 +311,7 @@ We do not charge a fee to process or respond to your verifiable consumer request
 
 ### Personal Information Sales Opt-Out and Opt-In Rights
 
-You have the right to direct us to not sell your personal information at any time by sending an email to support@CashMoney.Monster with the exact subject line “California Resident Personal Information Sales Opt-Out” or by calling (614) 502-9079.
+You have the right to direct us to not sell your personal information at any time by sending an email to support@CashMoney.Monster with the exact subject line “California Resident Personal Information Sales Opt-Out” or by calling 614-502-9079.
 
 [support@CashMoney.Monster](mailto:support@CashMoney.Monster)
 
