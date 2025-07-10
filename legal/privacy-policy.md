@@ -16,23 +16,39 @@ Companies choose how they share your personal information. Consumers have the ri
 The types of personal information we collect and share depend on whether you simply browse our website or whether you submit a loan request on our website. This information generally includes, but is not limited to:
 
 **Information you provide:**
+
 1. Personal information like your name and date of birth
+
 2. Age, including whether you are 40 years old or older
+
 3. Social Security number, driver's license number, and/or other similar identifiers
+
 4. Employment and income information
+
 5. Active military duty status
+
 6. Banking account information
+
 7. Contact information like your email address, phone number, and physical address (including how long you've been at that address)
+
 8. Loan information like the amount requested, the loan reason, and when you prefer to be contacted
+
 9. Your communications with us
 
 **Information we collect automatically:**
+
 1. Internet protocol addresses
+
 2. Browser / application type
+
 3. Internet Service Provider
+
 4. Date/time stamp
+
 5. Referring/exit pages
+
 6. Your activity on our site
+
 7. Geolocation data
 
 ### How?
@@ -45,17 +61,29 @@ Companies like ours need to share users' personal information to run their every
 We may use personal information we collect for one or more of the following business purposes:
 
 1. To fulfill or meet the reason for which the information is provided. For example, if you provide us with personal information in order for us to connect you with a lender, we will use that information to try to connect you with a lender.
+
 2. To provide you with information, products or services that you request from us. For example, to provide you with information about loans in response to your loan request.
+
 3. To provide you with email alerts and other notices concerning our products or services, or events or news, that may be of interest to you. For example, to provide you with information about other consumer financial products or services that may be of interest to you, such as credit monitoring, debt relief and credit cards.
+
 4. To improve our website and present its contents to you, including creating an account using the information you provide on our website so you can easily submit loan inquiries in the future.
+
 5. For testing, research, analysis and product development.
+
 6. To improve our systems and algorithms.
+
 7. To prevent, identify, investigate, and deter fraudulent, harmful, unauthorized, unethical, or illegal activity, including cyberattacks and identity theft.
+
 8. As necessary or appropriate to protect the rights, property or safety of us, our clients or others.
+
 9. To respond to law enforcement requests and as required by applicable law, court order, or governmental regulations.
+
 10. As described to you when collecting your personal information.
+
 11. To evaluate or conduct a merger, divestiture, restructuring, reorganization, dissolution, or other sale or transfer of some or all of our assets, whether as a going concern or as part of bankruptcy, liquidation, or similar proceeding, in which personal information held by us is among the assets transferred.
+
 12. To create an account for you so that you can more easily submit loan inquiries in the future on this website and our affiliated websites using your previously-provided information.
+
 13. Other uses which you expressly consent to.
 
 For more information on how we make money using your data, see our [Ad Disclosure](https://www.cashmoney.monster/disclosure/).
@@ -65,14 +93,35 @@ For more information on how we make money using your data, see our [Ad Disclosur
 
 ### Reasons We May Share Your Personal Information
 
-| Reason for Sharing | Do We Share? | Can You Limit This Sharing? |
-|-------------------|--------------|----------------------------|
-| For our everyday business purposes – such as to try to connect you with a lender, process your transactions, or allow you to more easily submit loan requests in the future. | Yes | At the time you submit a loan request: No<br>Any time after you submit a loan request: Yes |
-| For our marketing purposes – to offer our products and services to you | Yes | At the time you submit a loan request: No<br>Any time after you submit a loan request: Yes |
-| For our affiliates' everyday business purposes – to facilitate our everyday business purposes and our marketing purposes described above. | Yes | No |
-| For non-affiliates to market to you – to market loans in response to your loan request. | Yes | At the time you submit a loan request: No<br>Any time after you submit a loan request: Yes |
-| For non-affiliates to market to you – to market other consumer financial products or services, such as credit repair, debt relief, credit cards, and banking services. | Yes | Yes |
-| As required by law – to respond to court orders and legal investigations as required by law. | Yes | No |
+**For our everyday business purposes** – such as to try to connect you with a lender, process your transactions, or allow you to more easily submit loan requests in the future.
+
+- Do we share? **Yes**
+- Can you limit this sharing? At the time you submit a loan request: **No** | Any time after you submit a loan request: **Yes**
+
+**For our marketing purposes** – to offer our products and services to you
+
+- Do we share? **Yes**
+- Can you limit this sharing? At the time you submit a loan request: **No** | Any time after you submit a loan request: **Yes**
+
+**For our affiliates' everyday business purposes** – to facilitate our everyday business purposes and our marketing purposes described above.
+
+- Do we share? **Yes**
+- Can you limit this sharing? **No**
+
+**For non-affiliates to market to you** – to market loans in response to your loan request.
+
+- Do we share? **Yes**
+- Can you limit this sharing? At the time you submit a loan request: **No** | Any time after you submit a loan request: **Yes**
+
+**For non-affiliates to market to you** – to market other consumer financial products or services, such as credit repair, debt relief, credit cards, and banking services.
+
+- Do we share? **Yes**
+- Can you limit this sharing? **Yes**
+
+**As required by law** – to respond to court orders and legal investigations as required by law.
+
+- Do we share? **Yes**
+- Can you limit this sharing? **No**
 
 ### Sharing Your Sensitive Personal Information
 
@@ -87,10 +136,15 @@ We will not share your Sensitive Personal Information unless you have requested 
 ### Categories of Non-Affiliates We Share Your Information With
 
 1. Lenders
+
 2. Networks of lenders
+
 3. Agents of record for lenders
+
 4. Financial technology companies that offer loans in partnership with licensed banks
+
 5. Other non-affiliates that may be able to offer you or market consumer financial products or services related to your loan request (for example, debt repair and credit monitoring services)
+
 6. Other non-affiliate service providers to facilitate our marketing to you
 
 For more information on how we make money using your data, see our [Ad Disclosure](https://www.cashmoney.monster/disclosure/).
