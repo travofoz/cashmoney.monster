@@ -1,4 +1,3 @@
-import { serialize } from 'next-mdx-remote/serialize';
 import fs from 'fs';
 import path from 'path';
 
@@ -31,11 +30,31 @@ function parseFrontmatter(content) {
 }
 
 /**
+ * Simple markdown to HTML converter
+ * @param {string} markdown - Raw markdown content
+ * @returns {string} HTML string
+ */
+function markdownToHtml(markdown) {
+  return markdown
+    .replace(/^# (.*$)/gim, '<h1>$1</h1>')
+    .replace(/^## (.*$)/gim, '<h2>$1</h2>')
+    .replace(/^### (.*$)/gim, '<h3>$1</h3>')
+    .replace(/^#### (.*$)/gim, '<h4>$1</h4>')
+    .replace(/\*\*(.*?)\*\*/gim, '<strong>$1</strong>')
+    .replace(/\*(.*?)\*/gim, '<em>$1</em>')
+    .replace(/\[([^\]]+)\]\(([^)]+)\)/gim, '<a href="$2" className="text-black/70 hover:text-black">$1</a>')
+    .replace(/\n\n/gim, '</p><p>')
+    .replace(/^(.+)$/gim, '<p>$1</p>')
+    .replace(/<p><h/gim, '<h')
+    .replace(/<\/h([1-6])><\/p>/gim, '</h$1>');
+}
+
+/**
  * Reads and processes markdown files from the legal directory
  * @param {string} filename - The markdown filename (without extension)
- * @returns {Promise<{content: any, frontmatter: any}>} Processed MDX content and frontmatter
+ * @returns {{content: string, frontmatter: object}} Raw HTML content and frontmatter
  */
-export async function getMarkdownContent(filename) {
+export function getMarkdownContent(filename) {
   try {
     const filePath = path.join(process.cwd(), 'legal', `${filename}.md`);
     const fileContent = fs.readFileSync(filePath, 'utf8');
@@ -43,16 +62,11 @@ export async function getMarkdownContent(filename) {
     // Parse frontmatter and content
     const { content, data: frontmatter } = parseFrontmatter(fileContent);
     
-    // Serialize the markdown content for next-mdx-remote
-    const mdxSource = await serialize(content, {
-      mdxOptions: {
-        remarkPlugins: [],
-        rehypePlugins: [],
-      },
-    });
+    // Convert markdown to HTML
+    const htmlContent = markdownToHtml(content);
     
     return {
-      content: mdxSource,
+      content: htmlContent,
       frontmatter,
     };
   } catch (error) {
