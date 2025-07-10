@@ -7,7 +7,7 @@ Last Updated July 7, 2025
 #### INTRODUCTION
 
 
-Please read these Terms of Use (“Terms”) for BadCreditLoans.com (“Site”) and its services carefully. By using the Site, its services, or otherwise agreeing to these Terms, you agree to be bound by the terms and conditions below. If you do not agree to these Terms, you are not authorized to access or use the Site or its services.
+Please read these Terms of Use (“Terms”) for Lead Plateau (“Site”) and its services carefully. By using the Site, its services, or otherwise agreeing to these Terms, you agree to be bound by the terms and conditions below. If you do not agree to these Terms, you are not authorized to access or use the Site or its services.
 
 
 For purposes of these Terms, “you” or “your” means the person(s) using this Site or the services offered through this Site. “We” or “us” includes Lead Plateau, its service providers, clients and affiliated companies.
