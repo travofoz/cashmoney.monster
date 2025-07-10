@@ -16,7 +16,7 @@ export default function Contact() {
             
             <h3>Customer Support</h3>
             <p>
-              <strong>Phone:</strong> 1-800-CASH-NOW<br/>
+              <strong>Phone:</strong> 614-502-9079<br/>
               <strong>Email:</strong> support@cashmoney.monster<br/>
               <strong>Hours:</strong> Monday - Friday, 8AM - 8PM EST
             </p>
@@ -25,9 +25,9 @@ export default function Contact() {
             <p>
               Cash Money MONSTER<br/>
               Lead Plateau<br/>
-              123 Financial Street<br/>
-              Suite 100<br/>
-              Charlotte, NC 28202
+              8 The Green<br/>
+              Suite 4000<br/>
+              Dover, DE 19901
             </p>
             
             <h3>Frequently Asked Questions</h3>

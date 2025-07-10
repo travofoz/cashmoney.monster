@@ -1,6 +1,5 @@
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import Footer from "@/components/Footer";
 import Link from "next/link";
 import { getMarkdownContent } from '@/utils/markdownProcessor';
 
@@ -28,7 +27,6 @@ export default function RatesAndFees() {
           </Card>
         </div>
       </div>
-      <Footer />
     </div>
   );
 }
