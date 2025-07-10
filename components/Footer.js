@@ -22,12 +22,6 @@ export default function Footer() {
                 <li><Link href="/privacy" className="text-black/60 hover:text-black">Privacy Policy</Link></li>
                 <li><Link href="/disclosure" className="text-black/60 hover:text-black">Ad Disclosure</Link></li>
                 <li><Link href="/credit-authorization" className="text-black/60 hover:text-black">Credit Authorization</Link></li>
-              </ul>
-            </div>
-            
-            <div>
-              <h4 className="font-bold mb-4 text-black">Disclosures</h4>
-              <ul className="space-y-2 text-sm">
                 <li><Link href="/econsent" className="text-black/60 hover:text-black">E-Consent</Link></li>
                 <li><Link href="/rates-and-fees" className="text-black/60 hover:text-black">Rates & Fees</Link></li>
                 <li><Link href="/third-parties" className="text-black/60 hover:text-black">Third Parties</Link></li>
