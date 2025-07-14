@@ -26,6 +26,7 @@ export default function Footer() {
                 <li><Link href="/econsent" className="text-black/60 hover:text-black">E-Consent</Link></li>
                 <li><Link href="/rates-and-fees" className="text-black/60 hover:text-black">Rates & Fees</Link></li>
                 <li><Link href="/third-parties" className="text-black/60 hover:text-black">Third Parties</Link></li>
+                <li><a href="https://leadplateau.com/unsubscribe" className="text-black/60 hover:text-black">Unsubscribe</a></li>
               </ul>
             </div>
           </div>
