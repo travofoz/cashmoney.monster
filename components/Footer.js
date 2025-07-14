@@ -20,6 +20,7 @@ export default function Footer() {
               <ul className="space-y-2 text-sm">
                 <li><Link href="/terms" className="text-black/60 hover:text-black">Terms of Service</Link></li>
                 <li><Link href="/privacy" className="text-black/60 hover:text-black">Privacy Policy</Link></li>
+                <li><Link href="/tcpa-notice" className="text-black/60 hover:text-black">TCPA Notice</Link></li>
                 <li><Link href="/disclosure" className="text-black/60 hover:text-black">Ad Disclosure</Link></li>
                 <li><Link href="/credit-authorization" className="text-black/60 hover:text-black">Credit Authorization</Link></li>
                 <li><Link href="/econsent" className="text-black/60 hover:text-black">E-Consent</Link></li>

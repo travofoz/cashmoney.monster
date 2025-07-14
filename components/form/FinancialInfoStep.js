@@ -2,6 +2,7 @@
 
 import React from 'react';
 import FormInput from './FormInput';
+import TCPAHelpIcon from '@/components/ui/TCPAHelpIcon';
 
 /**
  * Step 4: Financial Information
@@ -189,15 +190,25 @@ export default function FinancialInfoStep({ formData, onChange }) {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          <FormInput
-            name="employerPhone"
-            label="Work Phone"
-            type="tel"
-            value={formData.employerPhone}
-            onChange={onChange}
-            required={false}
-            placeholder="(555) 123-4567"
-          />
+          <div className="space-y-1">
+            <div className="flex items-center gap-2">
+              <div className="flex-1">
+                <FormInput
+                  name="employerPhone"
+                  label="Work Phone"
+                  type="tel"
+                  value={formData.employerPhone}
+                  onChange={onChange}
+                  required={false}
+                  placeholder="(555) 123-4567"
+                />
+              </div>
+              <TCPAHelpIcon className="mt-6" />
+            </div>
+            <p className="text-xs text-muted-foreground">
+              By providing your work number, you consent to receive calls during business hours.
+            </p>
+          </div>
 
           <FormInput
             name="timeAtJob"

@@ -50,7 +50,6 @@ export default function TCPAConsentStep({ formData, onChange }) {
                 checked={formData.tcpa || false}
                 onChange={(e) => onChange('tcpa', e.target.checked)}
                 className="rounded border-gray-300 mt-1"
-                required
               />
               <label htmlFor="tcpa" className="text-sm leading-relaxed">
                 <span className="font-medium">I agree to the following terms:</span>

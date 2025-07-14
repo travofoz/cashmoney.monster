@@ -20,12 +20,33 @@ export default function MonsterPeekaboo() {
   };
 
   useEffect(() => {
-    // Initial show after 5 seconds
-    const initialTimer = setTimeout(showMonster, 5000);
+    // Check if form is active (look for form elements that indicate user is in form)
+    const checkFormActive = () => {
+      const hasFormElements = document.querySelector('[data-form-step]') || 
+                            document.querySelector('.form-container') ||
+                            document.querySelector('[class*="step"]') ||
+                            document.querySelector('input[type="range"]') || // Loan amount slider
+                            document.querySelector('input[name="firstName"]') ||
+                            document.querySelector('input[name="email"]') ||
+                            document.querySelector('select[name="loanPurpose"]') ||
+                            document.querySelector('input[name="address"]') ||
+                            document.querySelector('input[name="employerName"]') ||
+                            document.querySelector('input[name="bankName"]') ||
+                            document.querySelector('input[name="tcpaPhone"]') ||
+                            document.querySelector('button:contains("Submit Application")');
+      return hasFormElements;
+    };
     
-    // Show every 30 seconds
+    // Initial show after 5 seconds, but only if no form is active
+    const initialTimer = setTimeout(() => {
+      if (!checkFormActive()) {
+        showMonster();
+      }
+    }, 5000);
+    
+    // Show every 30 seconds, but only if no form is active
     const interval = setInterval(() => {
-      if (!isVisible) {
+      if (!isVisible && !checkFormActive()) {
         showMonster();
       }
     }, 30000);

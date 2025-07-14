@@ -2,6 +2,7 @@
 
 import React from 'react';
 import FormInput from './FormInput';
+import TCPAHelpIcon from '@/components/ui/TCPAHelpIcon';
 
 /**
  * Step 3: Personal Information
@@ -102,26 +103,46 @@ export default function PersonalInfoStep({ formData, onChange }) {
           placeholder="your@email.com"
         />
 
-        <FormInput
-          name="homePhone"
-          label="Home Phone"
-          type="tel"
-          value={formData.homePhone}
-          onChange={onChange}
-          required={true}
-          placeholder="(555) 123-4567"
-        />
+        <div className="space-y-1">
+          <div className="flex items-center gap-2">
+            <div className="flex-1">
+              <FormInput
+                name="homePhone"
+                label="Home Phone"
+                type="tel"
+                value={formData.homePhone}
+                onChange={onChange}
+                required={true}
+                placeholder="(555) 123-4567"
+              />
+            </div>
+            <TCPAHelpIcon className="mt-6" />
+          </div>
+          <p className="text-xs text-muted-foreground">
+            By providing this number, you consent to receive calls/texts about your loan request.
+          </p>
+        </div>
       </div>
 
-      <FormInput
-        name="mobilePhone"
-        label="Mobile Phone"
-        type="tel"
-        value={formData.mobilePhone}
-        onChange={onChange}
-        required={false}
-        placeholder="(555) 123-4567"
-      />
+      <div className="space-y-1">
+        <div className="flex items-center gap-2">
+          <div className="flex-1">
+            <FormInput
+              name="mobilePhone"
+              label="Mobile Phone"
+              type="tel"
+              value={formData.mobilePhone}
+              onChange={onChange}
+              required={false}
+              placeholder="(555) 123-4567"
+            />
+          </div>
+          <TCPAHelpIcon className="mt-6" />
+        </div>
+        <p className="text-xs text-muted-foreground">
+          By providing this number, you consent to receive calls/texts about your loan request.
+        </p>
+      </div>
 
       <FormInput
         name="address"

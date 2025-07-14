@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useMemo, useRef } from "react";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Slider } from "@/components/ui/slider";
@@ -8,7 +8,6 @@ import { Progress } from "@/components/ui/progress";
 import { Card, CardHeader, CardTitle, CardDescription, CardContent } from "@/components/ui/card";
 import FormInput from "@/components/form/FormInput";
 import BankingInformationStep from "@/components/form/BankingInformationStep";
-import LoanApplicationForm from "@/components/LoanApplicationForm";
 import { loadFormData, saveFormData, initialFormData, clearFormData } from "@/utils/formState";
 import LoanHero from './LoanHero';
 
@@ -64,7 +63,13 @@ const LoanAmountSlider = ({ value, onChange }) => {
 export default function CashMonsterHomePage() {
   const [currentStep, setCurrentStep] = useState(1); // Start with loan amount
   const [formData, setFormData] = useState(initialFormData);
+  const formDataRef = useRef(formData);
   const totalSteps = 7;
+
+  // Keep ref in sync with formData
+  useEffect(() => {
+    formDataRef.current = formData;
+  }, [formData]);
 
   useEffect(() => {
     // Check for clear/fresh URL parameters
@@ -175,7 +180,7 @@ export default function CashMonsterHomePage() {
       setFormData(newData);
       saveFormData(newData);
     }
-  }, [currentStep]);
+  }, [currentStep, formData, smartDefaults]);
 
   // Calculate monthly income when paycheck amount or frequency changes
   useEffect(() => {
@@ -205,14 +210,14 @@ export default function CashMonsterHomePage() {
         const calculatedMonthlyIncome = `$${Math.round(monthlyIncome).toLocaleString()}`;
         
         // Only update if the calculated value is different
-        if (formData.monthlyIncome !== calculatedMonthlyIncome) {
-          const updatedData = { ...formData, monthlyIncome: calculatedMonthlyIncome };
+        if (formDataRef.current.monthlyIncome !== calculatedMonthlyIncome) {
+          const updatedData = { ...formDataRef.current, monthlyIncome: calculatedMonthlyIncome };
           setFormData(updatedData);
           saveFormData(updatedData);
         }
       }
     }
-  }, [formData.paycheckAmount, formData.payFrequency]);
+  }, [formData.paycheckAmount, formData.payFrequency, formData.monthlyIncome]);
 
   const handleFieldChange = (fieldName, value) => {
     const newData = { ...formData, [fieldName]: value };
@@ -249,7 +254,7 @@ export default function CashMonsterHomePage() {
     switch(currentStep) {
       case 1: return formData.loanAmount;
       case 2: return formData.loanPurpose;
-      case 3: return formData.firstName && formData.lastName && formData.email && formData.mobilePhone && formData.preferredPronouns;
+      case 3: return formData.firstName && formData.lastName && formData.email && formData.mobilePhone;
       case 4: return formData.address && formData.city && formData.state && formData.zip && formData.homeStatus && formData.timeAtResidence && formData.dateOfBirth;
       case 5: 
         const step5Valid = formData.employmentStatus && formData.employerName && formData.workPhone && 
@@ -258,20 +263,20 @@ export default function CashMonsterHomePage() {
       case 6: return formData.bankName && formData.accountType && formData.routingNumber && 
                      formData.accountNumber && formData.timeAtBank && formData.driverLicenseNumber && 
                      formData.driverLicenseState && formData.ssn;
-      case 7: return formData.tcpaPhone && formData.tcpaConsent === '1' && formData.activeMilitary;
+      case 7: return formData.activeMilitary !== undefined;
       default: return false;
     }
   };
 
 
   // Smart defaults mapping - fields that get partial credit when empty
-  const smartDefaults = {
+  const smartDefaults = useMemo(() => ({
     paycheckAmount: '$750',
     payFrequency: 'B', 
     timeAtJob: '3',
     accountType: 'Checking',
     timeAtBank: '3'
-  };
+  }), []);
 
   // Get completion value for a field (1.0 = filled, 0.5 = has default, 0.0 = empty)
   const getFieldCompletionValue = (fieldName, actualValue) => {
@@ -307,7 +312,7 @@ export default function CashMonsterHomePage() {
         const step6Total = step6Fields.reduce((sum, field) => sum + getFieldCompletionValue(field, formData[field]), 0);
         return (step6Total / step6Fields.length) * 100;
       case 7:
-        const step7Fields = ['tcpaPhone', 'tcpaConsent', 'activeMilitary'];
+        const step7Fields = ['activeMilitary'];
         const step7Total = step7Fields.reduce((sum, field) => sum + getFieldCompletionValue(field, formData[field]), 0);
         return (step7Total / step7Fields.length) * 100;
       default:
@@ -434,14 +439,15 @@ export default function CashMonsterHomePage() {
                   />
                   <FormInput
                     name="preferredPronouns"
-                    label="Preferred Pronouns"
+                    label="I am a..."
                     value={formData.preferredPronouns}
                     onChange={handleFieldChange}
-                    required={true}
+                    required={false}
                     options={[
                       { value: 'M', label: 'he/him' },
                       { value: 'F', label: 'she/her' },
-                      { value: 'M', label: 'they/them', key: 'they' }
+                      { value: 'M', label: 'they/them', key: 'they' },
+                      { value: 'X', label: 'Prefer not to say' }
                     ]}
                     placeholder="Select pronouns"
                   />
@@ -650,10 +656,14 @@ export default function CashMonsterHomePage() {
                   <FormInput
                     name="activeMilitary"
                     label="Are you active duty military?"
-                    type="checkbox"
-                    value={formData.activeMilitary}
+                    value={formData.activeMilitary || 'no'}
                     onChange={handleFieldChange}
                     required={true}
+                    options={[
+                      { value: 'yes', label: 'Yes' },
+                      { value: 'no', label: 'No' }
+                    ]}
+                    placeholder="Select military status"
                   />
                   <div className="bg-muted p-4 rounded-lg">
                     <h3 className="text-base font-medium text-foreground mb-3">TCPA Consent Agreement</h3>
@@ -684,7 +694,7 @@ export default function CashMonsterHomePage() {
                     type="checkbox"
                     value={formData.tcpaConsent}
                     onChange={handleFieldChange}
-                    required={true}
+                    required={false}
                   />
                 </div>
               )}

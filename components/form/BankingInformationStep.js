@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { Button } from '@/components/ui/button';
 import FormInput from './FormInput';
 import { validateAndGetBank } from '@/utils/bankLookup';
@@ -9,35 +9,55 @@ export default function BankingInformationStep({ formData, onChange }) {
   const [isLoadingBank, setIsLoadingBank] = useState(false);
   const [autoPopulatedBankName, setAutoPopulatedBankName] = useState(null);
   const [showBankOverride, setShowBankOverride] = useState(false);
+  const lastRoutingNumberRef = useRef('');
+  const lastAutoPopulatedBankNameRef = useRef(null);
+  const currentBankNameRef = useRef(formData.bankName);
+
+  // Update ref when bankName changes
+  useEffect(() => {
+    currentBankNameRef.current = formData.bankName;
+  }, [formData.bankName]);
 
   // Auto-populate bank name when routing number changes
   useEffect(() => {
     const lookupBank = async () => {
       if (formData.routingNumber && formData.routingNumber.length === 9) {
+        // Only run lookup if routing number actually changed
+        if (lastRoutingNumberRef.current === formData.routingNumber) {
+          return;
+        }
+        
+        lastRoutingNumberRef.current = formData.routingNumber;
         setIsLoadingBank(true);
+        
         try {
           const result = await validateAndGetBank(formData.routingNumber);
           if (result.isValid && result.bankName) {
             setAutoPopulatedBankName(result.bankName);
             // Only auto-set if bank name is empty or matches previous auto-populated name
-            if (!formData.bankName || formData.bankName === autoPopulatedBankName) {
+            if (!currentBankNameRef.current || currentBankNameRef.current === lastAutoPopulatedBankNameRef.current) {
               onChange('bankName', result.bankName);
             }
+            lastAutoPopulatedBankNameRef.current = result.bankName;
           } else {
             setAutoPopulatedBankName(null);
+            lastAutoPopulatedBankNameRef.current = null;
           }
         } catch (error) {
           console.error('Bank lookup failed:', error);
           setAutoPopulatedBankName(null);
+          lastAutoPopulatedBankNameRef.current = null;
         }
         setIsLoadingBank(false);
       } else {
         setAutoPopulatedBankName(null);
+        lastRoutingNumberRef.current = '';
+        lastAutoPopulatedBankNameRef.current = null;
       }
     };
 
     lookupBank();
-  }, [formData.routingNumber]);
+  }, [formData.routingNumber, onChange]);
 
   const handleBankNameOverride = () => {
     setShowBankOverride(true);
@@ -46,6 +66,7 @@ export default function BankingInformationStep({ formData, onChange }) {
   const confirmBankNameOverride = () => {
     setShowBankOverride(false);
     setAutoPopulatedBankName(null); // Stop auto-populating
+    lastAutoPopulatedBankNameRef.current = null; // Reset auto-populated reference
   };
 
   return (
