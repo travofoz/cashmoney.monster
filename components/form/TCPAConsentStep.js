@@ -3,7 +3,7 @@
 import React from 'react';
 
 /**
- * Step 6: TCPA Consent and Final Review
+ * Step 7: TCPA Consent and Final Review
  * @param {Object} props - Component props
  * @param {Object} props.formData - Current form data
  * @param {Function} props.onChange - Field change handler
@@ -55,16 +55,8 @@ export default function TCPAConsentStep({ formData, onChange }) {
                 <span className="font-medium">I agree to the following terms:</span>
                 <div className="mt-2 space-y-2 text-xs">
                   <p>
-                    By submitting this form, I agree to receive phone calls and text messages from this company 
-                    and its partners regarding loan offers. I understand that:
+                    You are providing your express written consent to share your information with up to five (5) of Cash Money Monster's Network Partners, and for those Network Partners, Cash Money Monster, and authorized third parties calling on their behalf, to contact you via telephone calls or text messages, including for marketing purposes, using an automatic telephone dialing system or an artificial or pre-recorded voice to the phone number I have provided. I understand that I am providing this consent to receive such telephone calls even if my telephone number is currently listed on any federal, state, local, internal, or corporate Do-Not-Call ("DNC") Lists. I understand that consent is not required as a condition of purchasing any services or products, and that I may choose to be contacted by an individual customer care representative at 1-614-502-9079.
                   </p>
-                  <ul className="list-disc list-inside space-y-1 ml-2">
-                    <li>Calls and texts may be made using automated technology</li>
-                    <li>I may receive calls from multiple lenders and marketing partners</li>
-                    <li>Message and data rates may apply</li>
-                    <li>I can opt out at any time by replying STOP</li>
-                    <li>My consent is not required to obtain a loan</li>
-                  </ul>
                   <p>
                     I also acknowledge that I have read and agree to the 
                     <span className="text-blue-600 dark:text-blue-400"> Terms of Service</span> and 

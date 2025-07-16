@@ -4,7 +4,7 @@ Last Updated: July 14, 2025
 
 ## Telephone Consumer Protection Act (TCPA) Consent
 
-By providing your phone number(s) and submitting this form, you expressly consent to receive telephone calls and text messages from Cash Money Monster and our network of lenders and marketing partners.
+You are providing your express written consent to share your information with up to five (5) of Cash Money Monster's Network Partners, and for those Network Partners, Cash Money Monster, and authorized third parties calling on their behalf, to contact you via telephone calls or text messages, including for marketing purposes, using an automatic telephone dialing system or an artificial or pre-recorded voice to the phone number I have provided. I understand that I am providing this consent to receive such telephone calls even if my telephone number is currently listed on any federal, state, local, internal, or corporate Do-Not-Call ("DNC") Lists. I understand that consent is not required as a condition of purchasing any services or products, and that I may choose to be contacted by an individual customer care representative at 1-614-502-9079.
 
 ### What You're Consenting To
 
