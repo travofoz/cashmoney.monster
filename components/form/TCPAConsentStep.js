@@ -47,22 +47,12 @@ export default function TCPAConsentStep({ formData, onChange }) {
               <input
                 type="checkbox"
                 id="tcpa"
-                checked={formData.tcpa || false}
+                checked={formData.tcpa === true}
                 onChange={(e) => onChange('tcpa', e.target.checked)}
                 className="rounded border-gray-300 mt-1"
               />
               <label htmlFor="tcpa" className="text-sm leading-relaxed">
-                <span className="font-medium">I agree to the following terms:</span>
-                <div className="mt-2 space-y-2 text-xs">
-                  <p>
-                    You are providing your express written consent to share your information with up to five (5) of Cash Money Monster&apos;s Network Partners, and for those Network Partners, Cash Money Monster, and authorized third parties calling on their behalf, to contact you via telephone calls or text messages, including for marketing purposes, using an automatic telephone dialing system or an artificial or pre-recorded voice to the phone number I have provided. I understand that I am providing this consent to receive such telephone calls even if my telephone number is currently listed on any federal, state, local, internal, or corporate Do-Not-Call (&ldquo;DNC&rdquo;) Lists. I understand that consent is not required as a condition of purchasing any services or products, and that I may choose to be contacted by an individual customer care representative at 1-614-502-9079.
-                  </p>
-                  <p>
-                    I also acknowledge that I have read and agree to the 
-                    <span className="text-blue-600 dark:text-blue-400"> Terms of Service</span> and 
-                    <span className="text-blue-600 dark:text-blue-400"> Privacy Policy</span>.
-                  </p>
-                </div>
+I would like to receive additional marketing communications in addition to loan communications
               </label>
             </div>
           </div>
